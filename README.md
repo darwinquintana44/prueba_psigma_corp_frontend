@@ -1,6 +1,6 @@
 # Plantilla Administrativa de pruebas de la empresa PSIGMA CORP
 
-Este proyecto esta generado con [Angular CLI](https://github.com/angular/angular-cli) version 8.3.4.
+Este proyecto esta generado con [Angular CLI](https://github.com/angular/angular-cli) version 10.0.5.
 
 ## Para el area de desarrollo
 
