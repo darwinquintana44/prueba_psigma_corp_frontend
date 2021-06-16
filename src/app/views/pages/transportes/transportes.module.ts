@@ -10,9 +10,11 @@ import { TransportesRoutingModule } from './transportes-routing.module';
 import { TransportesComponent } from './transportes.component';
 import { VehiculosComponent } from './vehiculos/vehiculos.component';
 import { SupervisoresComponent } from './supervisores/supervisores.component';
-import { ConductoresComponent } from './conductores/conductores.component';
 import { AsignarConductorComponent } from './supervisores/asignar-conductor/asignar-conductor.component';
 import { AsignarComponent } from './supervisores/asignar-conductor/asignar/asignar.component';
+import { ConductoresComponent } from './conductores/conductores.component';
+import { CrearEditarComponent } from './conductores/crear-editar/crear-editar.component';
+import { AsignarVehiculoComponent } from './conductores/asignar-vehiculo/asignar-vehiculo.component';
 
 
 @NgModule({
@@ -20,9 +22,11 @@ import { AsignarComponent } from './supervisores/asignar-conductor/asignar/asign
     TransportesComponent,
     VehiculosComponent,
     SupervisoresComponent,
-    ConductoresComponent,
     AsignarConductorComponent,
-    AsignarComponent
+    AsignarComponent,
+    ConductoresComponent,
+    CrearEditarComponent,
+    AsignarVehiculoComponent
   ],
   imports: [
     CommonModule,

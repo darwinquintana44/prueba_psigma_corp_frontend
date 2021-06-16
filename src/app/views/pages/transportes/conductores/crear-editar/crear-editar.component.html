@@ -1,0 +1,154 @@
+<div *ngIf="cargando" class="spinner-wrapper">
+  <div class="spinner">Cargando...</div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-md-12">
+    <form #formulario="ngForm" (ngSubmit)="crearEditarDatos(formulario)">
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nombre">Nombres <span style="color: red">*</span></label>
+          <input
+            [(ngModel)]="datos.nombres"
+            [class.is-invalid]="Nombre.invalid && Nombre.touched" #Nombre="ngModel"
+            pattern="[a-zA-Z á-üÁ-Ü]{1,110}"
+            type="text"
+            minlength="3"
+            placeholder="Ingrese solamente su(s) Nombre(s)"
+            required
+            class="form-control"
+            name="nombre"
+            id="nombre">
+          <small class="form-text text-danger" *ngIf="Nombre.invalid && Nombre.touched">Este campo es obligatorio y debe tener al menos 3 caracteres</small>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="apellidos">Apellidos <span style="color: red">*</span></label>
+          <input
+            [(ngModel)]="datos.apellidos"
+            [class.is-invalid]="Apellidos.invalid && Apellidos.touched" #Apellidos="ngModel"
+            pattern="[a-zA-Z á-üÁ-Ü]{1,110}"
+            type="text"
+            minlength="3"
+            required
+            placeholder="Ingrese solamente su(s) Apellido(s)"
+            class="form-control"
+            name="apellidos"
+            id="apellidos">
+          <small class="form-text text-danger" *ngIf="Apellidos.invalid && Apellidos.touched">Este campo es obligatorio y debe tener al menos 3 caracteres</small>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="identificacion">Número de Identificación <span style="color: red">*</span></label>
+          <input
+            [(ngModel)]="datos.identificacion"
+            [class.is-invalid]="Numero_identificacion.invalid && Numero_identificacion.touched" #Numero_identificacion="ngModel"
+            pattern="[1-9]\d*"
+            type="text"
+            minlength="6"
+            required
+            class="form-control"
+            placeholder="Ingrese solamente su Nro. de Identificación"
+            name="identificacion"
+            id="identificacion">
+          <small class="form-text text-danger" *ngIf="Numero_identificacion.invalid && Numero_identificacion.touched">Este campo es obligatorio y debe tener al menos 6 dígitos</small>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="paises">Paises <span style="color: red">*</span></label>
+          <select
+            (change)="consultaDepartamentos(paisSeleccionado)"
+            [(ngModel)]="paisSeleccionado"
+            [class.is-invalid]="Paises.invalid && Paises.touched" #Paises="ngModel"
+            name="paises"
+            id="paises"
+            required
+            class="form-control">
+            <option value="" *ngIf="idConductor === -1">Seleccione</option>
+            <option [value]="datos['id']" *ngFor="let datos of dataPaises['data']">{{datos['descripcion']}}</option>
+          </select>
+          <small class="form-text text-danger" *ngIf="Paises.invalid && Paises.touched">Este campo es obligatorio</small>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="departamentos">Departamentos <span style="color: red">*</span></label>
+          <div *ngIf="cargandoDepartamento">
+            <b>SELECCIONE PRIMERO UN PAIS</b>
+          </div>
+          <div *ngIf="!cargandoDepartamento">
+            <select
+              (change)="consultaMunicipios(departamentoSeleccionado)"
+              [(ngModel)]="departamentoSeleccionado"
+              [class.is-invalid]="Departamentos.invalid && Departamentos.touched" #Departamentos="ngModel"
+              name="departamentos"
+              id="departamentos"
+              required
+              class="form-control">
+              <option value="" *ngIf="idConductor === -1">Seleccione</option>
+              <option [value]="datos['id']" *ngFor="let datos of dataDepartamentos['data']">{{datos['descripcion']}}</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="Departamentos.invalid && Departamentos.touched">Este campo es obligatorio</small>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="ciudad_nacimiento">Municipios <span style="color: red">*</span></label>
+          <div *ngIf="cargandoMunicipio">
+            <b>SELECCIONE PRIMERO UN DEPARTAMENTO</b>
+          </div>
+          <div *ngIf="!cargandoMunicipio">
+            <select
+              [(ngModel)]="datos.ciudad_nacimiento"
+              [class.is-invalid]="Municipios.invalid && Municipios.touched" #Municipios="ngModel"
+              name="ciudad_nacimiento"
+              id="ciudad_nacimiento"
+              required
+              class="form-control">
+              <option value="" *ngIf="idConductor === -1">Seleccione</option>
+              <option [value]="datos['id']" *ngFor="let datos of dataMunicipios['data']">{{datos['descripcion']}}</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="Municipios.invalid && Municipios.touched">Este campo es obligatorio</small>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="telefono">Teléfono</label>
+          <input
+            [(ngModel)]="datos.telefono"
+            pattern="[1-9]\d*"
+            type="text"
+            class="form-control"
+            name="telefono"
+            placeholder="Ingrese su Nro. Teléfonico"
+            id="telefono">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="direccion">Dirección</label>
+          <input
+            [(ngModel)]="datos.direccion"
+            type="text"
+            class="form-control"
+            name="direccion"
+            placeholder="Ingrese su Dirección"
+            id="direccion">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="form-row">
+        <div class="col-md-12" style="text-align: center">
+          <button type="submit" name="enviar" id="enviar" class="btn btn-outline-success btn-lg">{{textoBoton}}</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
