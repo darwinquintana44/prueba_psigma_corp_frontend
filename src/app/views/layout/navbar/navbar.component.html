@@ -1,0 +1,28 @@
+<nav class="navbar">
+    <a href="" class="sidebar-toggler" (click)="toggleSidebar($event)">
+        <i class="feather icon-menu"></i>
+    </a>
+    <div class="navbar-content">
+        <ul class="navbar-nav">
+            <div class="nav-item nav-profile">Bienvenid@ a la plataforma web de pruebas realizada por&nbsp; <b>Darwin Eder Quintana Chala</b> &nbsp;para la empresa&nbsp; <b> PSIGMA CORP</b></div>
+            <!-- fin de notificaciones o alertas -->
+            <li class="nav-item nav-profile" ngbDropdown>
+                <a class="nav-link" ngbDropdownToggle id="profileDropdown">
+                    <img src="https://www.psigmacorp.com/wp-content/uploads/cropped-favicon-psigma-corp-32x32.jpg">
+                </a>
+                <div ngbDropdownMenu aria-labelledby="profileDropdown">
+                    <div class="dropdown-body">
+                        <ul class="profile-nav p-0 pt-3">
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="feather icon-user"></i>
+                                    <span>Perfil del Usuario</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

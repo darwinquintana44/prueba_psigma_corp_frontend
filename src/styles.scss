@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+/**************************ESTILOS PARA EL BOTON DE FLOTANTE*****************************************/
+.float-button{
+  position:fixed !important;
+  width:60px !important;
+  height:60px !important;
+  bottom:40px !important;
+  right:40px !important;
+  //background-color:#25d366;
+  //color:#FFF;
+  border-radius:50px !important;
+  text-align:center !important;
+  font-size:30px !important;
+  //box-shadow: 2px 2px 3px #999;
+  z-index:100 !important;
+}
+.float-button:hover {
+  text-decoration: none !important;
+  //color: #25d366;
+  //background-color:#fff;
+}
+
+.my-float-button{
+  margin-top:14px !important;
+}

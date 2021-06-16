@@ -1,0 +1,72 @@
+<div *ngIf="cargando" class="spinner-wrapper">
+  <div class="spinner">Cargando...</div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <form #formulario="ngForm" (ngSubmit)="asignarSupervisor(formulario)">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="supervisor">Seleccionar Supervisor</label>
+              <select name="supervisor"
+                      id="supervisor"
+                      class="form-control"
+                      required
+                      [(ngModel)]="supervisorSeleccionado"
+                      [class.is-invalid]="Supervisor.invalid && Supervisor.touched" #Supervisor="ngModel">
+                <option value="">Seleccione...</option>
+                <option [value]="item.id" *ngFor="let item of datosSelect['data']">{{item.apellidos}}, {{item.nombres}}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="Supervisor.invalid && Supervisor.touched">Este campo es obligatorio</small>
+            </div>
+            <div class="form-group col-md-4">
+              <label>&nbsp;</label>
+              <button type="submit" class="form-control btn btn-block btn-danger" name="asignar" id="asignar">Asignar Supervisor</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+  <div class="col-md-12 stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="row col-md-12">
+          <div class="col-md-12">
+            <h6 class="card-title">Listado de Supervisores Asignados al Conductor: <b>{{nombreConductor}}</b></h6>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered row-border hover" cellspacing="0" width="100%">
+            <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Nro. Identificación</th>
+              <th>Fecha Asignación</th>
+              <th>Fecha Elimina Asignacion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let registro of datosDatatable['data']; let i = index">
+              <td> {{ i + 1 }} </td>
+              <td> {{ registro['nombres'] }} </td>
+              <td> {{ registro['apellidos'] }} </td>
+              <td> {{ registro['identificacion']}} </td>
+              <td> {{ registro['fecha_asignacion'] | date:'medium' }} </td>
+              <td> {{ registro['fecha_eliminacion'] | date:'medium' }} </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
